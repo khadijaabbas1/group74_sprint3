@@ -22,8 +22,8 @@ body {
 /* Header Image */
 #worldimage img {
   width: 100%;
-  max-height: 100px; 
-  object-fit: cover;
+  height: 100px; 
+  width: auto;
 }
 
 /* Navigation Bar */
