@@ -4,11 +4,11 @@ The Cypress system is an application designed to automate the process of reporti
 
 ## Team Members 
 
-Khadija Abbas (501186956) 
-Saadia Ali (501227915)
-Naureen Hossain (51239728)
-Shrishay Nayak (501246145)
-Rama Badran (501266695)
+1. Khadija Abbas (501186956)
+2. Saadia Ali (501227915)
+3. Naureen Hossain (51239728)
+4. Shrishay Nayak (501246145)
+5. Rama Badran (501266695)
 
 ## Application Features
 
