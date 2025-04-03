@@ -1,0 +1,98 @@
+/* Reset some default browser styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f7f9;
+  color: #333;
+}
+
+/* Container */
+#container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header Image */
+#worldimage img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Navigation Bar */
+nav {
+  background-color: #004a99;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+nav ul li a:hover {
+  background-color: #0066cc;
+}
+
+/* Side Image */
+#sideimage {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#sideimage img {
+  width: 80%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Body Content */
+#body1 {
+  margin-top: 20px;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#body1 h3 {
+  color: #004a99;
+  margin-bottom: 10px;
+}
+
+#body1 p {
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* Footer Banner Image */
+#bottomimage {
+  margin-top: 30px;
+  text-align: center;
+}
+
+#bottomimage img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
