@@ -72,6 +72,16 @@ nav ul li a:hover {
   padding-bottom: 8px;
 }
 
+#sideimage .tagline {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #444;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
 #sideimage img {
   width: 80%;
   height: auto;
