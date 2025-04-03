@@ -20,10 +20,14 @@ body {
 }
 
 /* Header Image */
+#worldimage {
+  text-align: center;
+}
+
 #worldimage img {
-  width: 100%;
-  height: 100px; 
+  height: 100px;
   width: auto;
+  display: inline-block;
 }
 
 /* Navigation Bar */
