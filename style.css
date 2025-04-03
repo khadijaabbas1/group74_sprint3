@@ -22,7 +22,7 @@ body {
 /* Header Image */
 #worldimage img {
   width: 100%;
-  height: auto;
+  height: 100px;
   border-radius: 8px;
 }
 
