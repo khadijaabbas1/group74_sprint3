@@ -1,3 +1,4 @@
+/* ################################################### CODE FOR HOME PAGE FORMATTING ####################################################################*/
 /* Reset some default browser styling */
 * {
   margin: 0;
@@ -168,3 +169,47 @@ nav ul li a:hover {
   height: auto;
   border-radius: 8px;
 }
+
+/* ####################################################### CODE FOR SUBMITTING A REPORT FORMAT ######################################################### */
+
+#report-form {
+  background-color: #f9f9f9;
+  padding: 25px;
+  border-radius: 8px;
+  max-width: 600px;
+  margin: 30px auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#report-form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #004a99;
+}
+
+#report-form input[type="text"],
+#report-form select,
+#report-form textarea,
+#report-form input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#report-form button {
+  margin-top: 20px;
+  background-color: #004a99;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#report-form button:hover {
+  background-color: #0062cc;
+}
+
