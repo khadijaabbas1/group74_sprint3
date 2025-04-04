@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Submit a Report - Cypress</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="container">
+    <h2>Submit a Street Issue Report</h2>
+
+    <form id="report-form">
+      <label for="issue-type">Type of Issue:</label>
+      <select id="issue-type" name="issue-type" required>
+        <option value="">Select an issue</option>
+        <option value="pothole">Pothole</option>
+        <option value="streetlight">Broken Streetlight</option>
+        <option value="garbage">Overflowing Garbage</option>
+        <option value="sidewalk">Damaged Sidewalk</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="description">Description:</label>
+      <textarea id="description" name="description" rows="5" required placeholder="Describe the problem in detail..."></textarea>
+
+      <label for="location">Street Address or Nearest Intersection:</label>
+      <input type="text" id="location" name="location" required placeholder="e.g., 123 Queen St W, Toronto">
+
+      <label for="photo">Upload a Photo (optional):</label>
+      <input type="file" id="photo" name="photo" accept="image/*">
+
+      <button type="submit">Submit Report</button>
+    </form>
+
+    <div id="form-success" style="display:none; color: green; margin-top: 15px;">
+      ✅ Your report has been submitted. Thank you for helping improve our city!
+    </div>
+  </div>
+
+  <script src="submit.js"></script>
+</body>
+</html>
