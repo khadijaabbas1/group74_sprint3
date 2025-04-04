@@ -209,6 +209,14 @@ nav ul li a:hover {
   cursor: pointer;
 }
 
+h2 {
+  color: blue;
+  font-size: 32px;
+  font-family: 'Arial', sans-serif; 
+  text-align: center;               
+  font-weight: bold;
+}
+
 #report-form button:hover {
   background-color: #0062cc;
 }
