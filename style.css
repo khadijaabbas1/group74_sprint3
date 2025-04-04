@@ -210,11 +210,12 @@ nav ul li a:hover {
 }
 
 h2 {
-  color: blue;
+  color: #004a99;
   font-size: 32px;
   font-family: 'Arial', sans-serif; 
   text-align: center;               
   font-weight: bold;
+  margin-top: 40px;
 }
 
 #report-form button:hover {
