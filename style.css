@@ -10,15 +10,14 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f4f7f9;
   color: #333;
-  margin: 0;
-  padding: 0;
+ 
 }
 
 /* Container */
 #container {
   max-width: 1200px;
   margin: 0 auto;
-  padding-top: 0;
+  padding: 80px;
 }
 
 /* Header Image */
