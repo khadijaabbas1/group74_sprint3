@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head><title>Submit a Report</title></head>
+<body>
+  <h2>Submit a Street Issue Report</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
