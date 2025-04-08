@@ -18,6 +18,7 @@ The Cypress system is an application designed to automate the process of reporti
 
 - HTML
 - CSS
+- PHP
 - Python
 
 ## Setup Instructions 
