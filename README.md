@@ -23,9 +23,8 @@ The Cypress system is an application designed to automate the process of reporti
 
 ## Setup Instructions 
 
-1. Clone the github repo.
-2. Navigate to the index.html file.
-3. Run the index.html file
+1. Download XAMPP then run MySqlDatabase and Apache Web Server.
+2. Open the link: "http://localhost/group74_sprint3/index.html"
 
 ## Acknowledgements
 
