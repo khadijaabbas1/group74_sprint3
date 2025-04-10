@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Map - Cypress</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 600px;
+      width: 90%;
+      margin: 30px auto;
+      border-radius: 10px;
+    }
+    .legend {
+      background: white;
+      padding: 10px;
+      border: 1px solid #999;
+      border-radius: 5px;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+    .legend span {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+    .filter-buttons {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .filter-buttons button {
+      margin: 5px;
+      padding: 6px 12px;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center;">📍 Interactive Issue Report Map</h2>
+
+  <div class="filter-buttons">
+    <button onclick="filterMarkers('all')">Show All</button>
+    <button onclick="filterMarkers('pothole')">Potholes</button>
+    <button onclick="filterMarkers('streetlight')">Streetlights</button>
+    <button onclick="filterMarkers('garbage')">Garbage</button>
+    <button onclick="filterMarkers('sidewalk')">Sidewalks</button>
+  </div>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const reports = [
+      { issue_type: 'pothole', description: 'Massive pothole near Queen St', latitude: 43.6495, longitude: -79.3848 },
+      { issue_type: 'streetlight', description: 'Broken streetlight flickering at night', latitude: 43.6512, longitude: -79.3865 },
+      { issue_type: 'garbage', description: 'Overflowing garbage bin on Bloor', latitude: 43.6550, longitude: -79.3821 },
+      { issue_type: 'sidewalk', description: 'Cracked sidewalk slab near intersection', latitude: 43.6571, longitude: -79.3883 },
+      { issue_type: 'pothole', description: 'Dangerous pothole by the bus stop', latitude: 43.6543, longitude: -79.3852 },
+      { issue_type: 'streetlight', description: 'Completely out streetlight on Front St', latitude: 43.6487, longitude: -79.3799 },
+      { issue_type: 'garbage', description: 'Garbage pile next to High Park entrance', latitude: 43.6562, longitude: -79.3894 },
+      { issue_type: 'sidewalk', description: 'Unleveled sidewalk making it hard for strollers', latitude: 43.6508, longitude: -79.3902 },
+      { issue_type: 'other', description: 'Graffiti on the side wall of the library', latitude: 43.6520, longitude: -79.3878 }
+    ];
+
+    const issueColors = {
+      pothole: 'red',
+      streetlight: 'blue',
+      garbage: 'green',
+      sidewalk: 'orange',
+      other: 'purple'
+    };
+
+    const map = L.map('map').setView([43.6532, -79.3832], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    const allMarkers = [];
+
+    reports.forEach(report => {
+      const color = issueColors[report.issue_type] || 'gray';
+      const icon = L.divIcon({
+        className: 'custom-icon',
+        html: `<div style="background-color: ${color}; width: 14px; height: 14px; border-radius: 50%; border: 2px solid white;"></div>`,
+        iconSize: [14, 14],
+        iconAnchor: [7, 7]
+      });
+
+      const marker = L.marker([report.latitude, report.longitude], { icon })
+        .bindPopup(`<strong>${report.issue_type.toUpperCase()}</strong><br>${report.description}`);
+
+      marker.issue_type = report.issue_type;
+      allMarkers.push(marker);
+      marker.addTo(map);
+    });
+
+    function filterMarkers(type) {
+      allMarkers.forEach(marker => marker.remove());
+      if (type === 'all') {
+        allMarkers.forEach(marker => marker.addTo(map));
+      } else {
+        allMarkers.filter(m => m.issue_type === type).forEach(marker => marker.addTo(map));
+      }
+    }
+
+    const legend = L.control({ position: 'bottomright' });
+    legend.onAdd = function () {
+      const div = L.DomUtil.create('div', 'legend');
+      div.innerHTML = '<strong>Legend</strong><br>';
+      for (const type in issueColors) {
+        div.innerHTML += `<span style="background:${issueColors[type]}"></span> ${type}<br>`;
+      }
+      return div;
+    };
+    legend.addTo(map);
+  </script>
+</body>
+</html>
