@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard – Cypress System</title>
+  <link rel="stylesheet" href="adminFuncStyle.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Administrator Dashboard</h1>
+    <div id="confirmation" class="confirmation-message"></div>
+
+    <table id="reportTable" class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div id="editForm" class="edit-form">
+      <h3>Edit Report</h3>
+      <input type="hidden" id="editId">
+      <label for="editDescription">Description: </label>
+      <input type="text" id="editDescription" class="input-field"><br><br>
+
+      <label for="editStatus">Status:</label>
+      <select id="editStatus" class="input-field">
+        <option>Unresolved</option>
+        <option>In Progress</option>
+        <option>Resolved</option>
+      </select><br><br>
+
+      <button class="btn" onclick="saveEdit()">Save</button>
+      <button class="btn" onclick="cancelEdit()">Cancel</button>
+    </div>
+  </div>
+
+  <script>
+    const reports = [
+  { id: 1, description: "Pothole", address: "123 Queen St W, Toronto, ON", status: "Unresolved" },
+  { id: 2, description: "Broken streetlight", address: "456 Yonge St, Toronto, ON", status: "In Progress" },
+  { id: 3, description: "Damaged sidewalk", address: "789 King St W, Toronto, ON", status: "Resolved" },
+    ];
+
+
+
+    function displayReports() {
+      const tableBody = document.querySelector("#reportTable tbody");
+      tableBody.innerHTML = "";
+      reports.forEach((report) => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td>${report.id}</td>
+          <td>
+            <div class="description-container">
+              <div class="description problem">${report.description}</div>
+              <div class="description address">${report.address}</div>
+            </div>
+          </td>
+          <td>${report.status}</td>
+          <td>
+            <button class="btn" onclick="editReport(${report.id})">Edit</button>
+            <button class="btn delete" onclick="deleteReport(${report.id})">Delete</button>
+          </td>
+        `;
+
+        tableBody.appendChild(row);
+      });
+    }
+
+
+    function editReport(id) {
+      const report = reports.find(r => r.id === id);
+      document.getElementById("editId").value = report.id;
+      document.getElementById("editDescription").value = report.description;
+      document.getElementById("editStatus").value = report.status;
+      document.getElementById("editForm").style.display = "block";
+    }
+
+
+    function saveEdit() {
+      const id = document.getElementById("editId").value;
+      const description = document.getElementById("editDescription").value;
+      const status = document.getElementById("editStatus").value;
+
+      const report = reports.find(r => r.id == id);
+      report.description = description;
+      report.status = status;
+
+      displayReports(); 
+      showConfirmation("Report updated successfully!");
+      cancelEdit();
+    }
+
+
+    function cancelEdit() {
+      document.getElementById("editForm").style.display = "none";
+    }
+
+
+    function deleteReport(id) {
+      const confirmation = confirm("Are you sure you want to delete this report?");
+      if (confirmation) {
+        const index = reports.findIndex(r => r.id === id);
+        reports.splice(index, 1);
+        displayReports();
+        showConfirmation("Report deleted successfully!");
+      }
+    }
+
+
+    function showConfirmation(message) {
+      const confirmationDiv = document.getElementById("confirmation");
+      confirmationDiv.textContent = message;
+      setTimeout(() => {
+        confirmationDiv.textContent = "";
+      }, 3000);
+    }
+
+
+    window.onload = displayReports;
+  </script>
+</body>
+</html>
