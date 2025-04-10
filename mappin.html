@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Drop a Pin - Cypress</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 500px;
+      width: 90%;
+      margin: 30px auto;
+      border-radius: 10px;
+    }
+    #coords-display {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    #save-btn {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center;">📍 Drop a Pin to Get Coordinates</h2>
+  <div id="map"></div>
+  <p id="coords-display">Click on the map to drop a pin and get the coordinates.</p>
+  <button id="save-btn" onclick="saveAndReturn()">✅ Save & Return to Form</button>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([43.6532, -79.3832], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    let marker;
+    let selectedLat = null;
+    let selectedLng = null;
+
+    map.on('click', function (e) {
+      selectedLat = e.latlng.lat.toFixed(5);
+      selectedLng = e.latlng.lng.toFixed(5);
+
+      if (marker) {
+        map.removeLayer(marker);
+      }
+
+      marker = L.marker([selectedLat, selectedLng]).addTo(map);
+
+      document.getElementById('coords-display').textContent = `📍 Latitude: ${selectedLat}, Longitude: ${selectedLng}`;
+    });
+
+    function saveAndReturn() {
+      if (!selectedLat || !selectedLng) {
+        alert("Please click on the map to drop a pin first.");
+        return;
+      }
+      localStorage.setItem('selected_lat', selectedLat);
+      localStorage.setItem('selected_lng', selectedLng);
+      window.location.href = 'submit.html';
+    }
+  </script>
+</body>
+</html>
+
+

@@ -7,9 +7,9 @@
 </head>
 <body>
   <div id="container">
-    <h2> Submit a Street Issue Report </h2>
+    <h2>Submit a Street Issue Report</h2>
 
-    <form id="report-form">
+    <form id="report-form" method="POST" action="submit.php" enctype="multipart/form-data" style="max-width: 600px; margin: auto;">
       <label for="issue-type">Type of Issue:</label>
       <select id="issue-type" name="issue-type" required>
         <option value="">Select an issue</option>
@@ -23,20 +23,63 @@
       <label for="description">Description:</label>
       <textarea id="description" name="description" rows="5" required placeholder="Describe the problem in detail..."></textarea>
 
-      <label for="location">Street Address or Nearest Intersection:</label>
-      <input type="text" id="location" name="location" required placeholder="e.g., 123 Queen St W, Toronto">
+      <label for="location">Street Address or Coordinates:</label>
+      <div style="display: flex; gap: 10px;">
+        <input type="text" id="location" name="location" placeholder="e.g., 123 Queen St W or use map" required style="flex: 1;">
+        <button type="button" onclick="goToMap()">📍 Use Map</button>
+      </div>
 
       <label for="photo">Upload a Photo (optional):</label>
       <input type="file" id="photo" name="photo" accept="image/*">
 
-      <button type="submit">Submit Report</button>
+      <!-- Hidden fields to also send lat/lng if needed -->
+      <input type="hidden" id="lat" name="latitude">
+      <input type="hidden" id="lng" name="longitude">
+
+      <button type="submit" style="margin-top: 10px;">Submit Report</button>
     </form>
 
-    <div id="form-success" style="display:none; color: green; margin-top: 15px;">
+    <div id="form-success" style="display:none; color: green; margin-top: 15px; text-align: center;">
       ✅ Your report has been submitted. Thank you for helping improve our city!
     </div>
   </div>
 
-  <script src="submit.js"></script>
+  <script>
+    function goToMap() {
+  // Save issue and description so they’re not lost
+  localStorage.setItem('draft_issue_type', document.getElementById('issue-type').value);
+  localStorage.setItem('draft_description', document.getElementById('description').value);
+  window.location.href = 'mappin.html';
+}
+
+
+    // Load coordinates from localStorage (if available)
+    window.addEventListener('DOMContentLoaded', () => {
+  const lat = localStorage.getItem('selected_lat');
+  const lng = localStorage.getItem('selected_lng');
+  const savedType = localStorage.getItem('draft_issue_type');
+  const savedDesc = localStorage.getItem('draft_description');
+
+  if (lat && lng) {
+    const coordsText = `Lat: ${lat}, Lng: ${lng}`;
+    document.getElementById('location').value = coordsText;
+    document.getElementById('lat').value = lat;
+    document.getElementById('lng').value = lng;
+    localStorage.removeItem('selected_lat');
+    localStorage.removeItem('selected_lng');
+  }
+
+  if (savedType) {
+    document.getElementById('issue-type').value = savedType;
+    localStorage.removeItem('draft_issue_type');
+  }
+
+  if (savedDesc) {
+    document.getElementById('description').value = savedDesc;
+    localStorage.removeItem('draft_description');
+  }
+});
+
+  </script>
 </body>
 </html>
