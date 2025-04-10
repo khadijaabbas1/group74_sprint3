@@ -107,6 +107,22 @@ body {
   input[type="text"], select {
     width: 100%;
   }
+
+.logout-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.logout-link a {
+  color: #206cfa;
+  font-size: 1.1rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.logout-link a:hover {
+  color: #206cfa;
+}
   
   .edit-form button {
     padding: 10px 20px;
