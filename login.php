@@ -40,7 +40,6 @@ if (isset($_POST['logins'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title> 
     <link rel="stylesheet" href="style.css">
-    
 </head>
 <body>
     <div class="main">
@@ -67,13 +66,15 @@ if (isset($_POST['logins'])) {
                         <p><a href="change-password.html">Forgot Password?</a></p> 
                     </div>
                     <button type="submit" id="loginBtn" class="login-btn">Login</button>
+                    <!-- Added onclick to redirect to admin login page -->
+                    <button type="button" id="adminBtn" class="login-btn admin-btn" onclick="window.location.href='adminFunc.html';">Login as Admin</button>
                 </form>
-
             
                 <div class="links">
                     <p><a href="register.php">Create Account</a></p>
                 </div>
             </div>
+        </div>
+    </div>
 </body>
 </html>
-            
