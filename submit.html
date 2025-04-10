@@ -9,7 +9,8 @@
   <div id="container">
     <h2>Submit a Street Issue Report</h2>
 
-    <form id="report-form" method="POST" action="success.html" enctype="multipart/form-data">
+    <!-- Form that uses JavaScript to redirect after submission -->
+    <form id="report-form" method="POST" onsubmit="handleFormSubmit(event)" enctype="multipart/form-data" style="max-width: 600px; margin: auto;">
       <label for="issue-type">Type of Issue:</label>
       <select id="issue-type" name="issue-type" required>
         <option value="">Select an issue</option>
@@ -32,7 +33,7 @@
       <label for="photo">Upload a Photo (optional):</label>
       <input type="file" id="photo" name="photo" accept="image/*">
 
-
+      <!-- Hidden fields to also send lat/lng if needed -->
       <input type="hidden" id="lat" name="latitude">
       <input type="hidden" id="lng" name="longitude">
 
@@ -43,11 +44,22 @@
 
   <script>
     function goToMap() {
+      // Save issue and description so they’re not lost
       localStorage.setItem('draft_issue_type', document.getElementById('issue-type').value);
       localStorage.setItem('draft_description', document.getElementById('description').value);
       window.location.href = 'mappin.html';
     }
 
+    function handleFormSubmit(event) {
+      event.preventDefault(); // Prevent the form from submitting the traditional way
+
+      // Do any necessary validation or form processing here
+
+      // Redirect to the success page after submission
+      window.location.href = 'success.html';
+    }
+
+    // Load coordinates from localStorage (if available)
     window.addEventListener('DOMContentLoaded', () => {
       const lat = localStorage.getItem('selected_lat');
       const lng = localStorage.getItem('selected_lng');
@@ -55,7 +67,8 @@
       const savedDesc = localStorage.getItem('draft_description');
 
       if (lat && lng) {
-        document.getElementById('location').value = `Lat: ${lat}, Lng: ${lng}`;
+        const coordsText = `Lat: ${lat}, Lng: ${lng}`;
+        document.getElementById('location').value = coordsText;
         document.getElementById('lat').value = lat;
         document.getElementById('lng').value = lng;
         localStorage.removeItem('selected_lat');
@@ -75,4 +88,3 @@
   </script>
 </body>
 </html>
-
