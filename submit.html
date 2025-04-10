@@ -32,56 +32,45 @@
       <label for="photo">Upload a Photo (optional):</label>
       <input type="file" id="photo" name="photo" accept="image/*">
 
-      <!-- Hidden fields to also send lat/lng if needed -->
       <input type="hidden" id="lat" name="latitude">
       <input type="hidden" id="lng" name="longitude">
 
       <button type="submit" style="margin-top: 10px;">Submit Report</button>
     </form>
-
-    
-    <div style="text-align:center; padding: 40px;">
-      <h2>✅ Your report has been submitted!</h2>
-      <p>Thanks for helping improve our city!</p>
-      <a href="index.html">← Submit another report</a>
-    </div>
+  </div>
 
   <script>
     function goToMap() {
-  // Save issue and description so they’re not lost
-  localStorage.setItem('draft_issue_type', document.getElementById('issue-type').value);
-  localStorage.setItem('draft_description', document.getElementById('description').value);
-  window.location.href = 'mappin.html';
-}
+      localStorage.setItem('draft_issue_type', document.getElementById('issue-type').value);
+      localStorage.setItem('draft_description', document.getElementById('description').value);
+      window.location.href = 'mappin.html';
+    }
 
-
-    // Load coordinates from localStorage (if available)
     window.addEventListener('DOMContentLoaded', () => {
-  const lat = localStorage.getItem('selected_lat');
-  const lng = localStorage.getItem('selected_lng');
-  const savedType = localStorage.getItem('draft_issue_type');
-  const savedDesc = localStorage.getItem('draft_description');
+      const lat = localStorage.getItem('selected_lat');
+      const lng = localStorage.getItem('selected_lng');
+      const savedType = localStorage.getItem('draft_issue_type');
+      const savedDesc = localStorage.getItem('draft_description');
 
-  if (lat && lng) {
-    const coordsText = `Lat: ${lat}, Lng: ${lng}`;
-    document.getElementById('location').value = coordsText;
-    document.getElementById('lat').value = lat;
-    document.getElementById('lng').value = lng;
-    localStorage.removeItem('selected_lat');
-    localStorage.removeItem('selected_lng');
-  }
+      if (lat && lng) {
+        document.getElementById('location').value = `Lat: ${lat}, Lng: ${lng}`;
+        document.getElementById('lat').value = lat;
+        document.getElementById('lng').value = lng;
+        localStorage.removeItem('selected_lat');
+        localStorage.removeItem('selected_lng');
+      }
 
-  if (savedType) {
-    document.getElementById('issue-type').value = savedType;
-    localStorage.removeItem('draft_issue_type');
-  }
+      if (savedType) {
+        document.getElementById('issue-type').value = savedType;
+        localStorage.removeItem('draft_issue_type');
+      }
 
-  if (savedDesc) {
-    document.getElementById('description').value = savedDesc;
-    localStorage.removeItem('draft_description');
-  }
-});
-
+      if (savedDesc) {
+        document.getElementById('description').value = savedDesc;
+        localStorage.removeItem('draft_description');
+      }
+    });
   </script>
 </body>
 </html>
+
