@@ -26,6 +26,13 @@ With the Cypress System citizens of Toronto are able to:
 - PHP
 - Python
 
+## Libraries & Tools Used
+
+-Leaflet.js
+- JavaScript
+- Git & GitHub
+- XAMPP
+
 ## Setup Instructions 
 
 1. Download XAMPP then run MySqlDatabase and Apache Web Server.
