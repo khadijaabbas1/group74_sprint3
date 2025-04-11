@@ -9,7 +9,7 @@
   <div id="container">
     <h2>Submit a Street Issue Report</h2>
 
-    <form id="report-form" method="POST" action="submit.php" enctype="multipart/form-data" style="max-width: 600px; margin: auto;">
+    <form id="report-form" enctype="multipart/form-data" style="max-width: 600px; margin: auto;">
       <label for="issue-type">Type of Issue:</label>
       <select id="issue-type" name="issue-type" required>
         <option value="">Select an issue</option>
@@ -46,40 +46,44 @@
 
   <script>
     function goToMap() {
-  // Save issue and description so they’re not lost
-  localStorage.setItem('draft_issue_type', document.getElementById('issue-type').value);
-  localStorage.setItem('draft_description', document.getElementById('description').value);
-  window.location.href = 'mappin.html';
-}
+      // Save issue and description so they’re not lost
+      localStorage.setItem('draft_issue_type', document.getElementById('issue-type').value);
+      localStorage.setItem('draft_description', document.getElementById('description').value);
+      window.location.href = 'mappin.html';
+    }
 
-
-    // Load coordinates from localStorage (if available)
+    // Load coordinates + saved values from localStorage
     window.addEventListener('DOMContentLoaded', () => {
-  const lat = localStorage.getItem('selected_lat');
-  const lng = localStorage.getItem('selected_lng');
-  const savedType = localStorage.getItem('draft_issue_type');
-  const savedDesc = localStorage.getItem('draft_description');
+      const lat = localStorage.getItem('selected_lat');
+      const lng = localStorage.getItem('selected_lng');
+      const savedType = localStorage.getItem('draft_issue_type');
+      const savedDesc = localStorage.getItem('draft_description');
 
-  if (lat && lng) {
-    const coordsText = `Lat: ${lat}, Lng: ${lng}`;
-    document.getElementById('location').value = coordsText;
-    document.getElementById('lat').value = lat;
-    document.getElementById('lng').value = lng;
-    localStorage.removeItem('selected_lat');
-    localStorage.removeItem('selected_lng');
-  }
+      if (lat && lng) {
+        document.getElementById('location').value = `Lat: ${lat}, Lng: ${lng}`;
+        document.getElementById('lat').value = lat;
+        document.getElementById('lng').value = lng;
+        localStorage.removeItem('selected_lat');
+        localStorage.removeItem('selected_lng');
+      }
 
-  if (savedType) {
-    document.getElementById('issue-type').value = savedType;
-    localStorage.removeItem('draft_issue_type');
-  }
+      if (savedType) {
+        document.getElementById('issue-type').value = savedType;
+        localStorage.removeItem('draft_issue_type');
+      }
 
-  if (savedDesc) {
-    document.getElementById('description').value = savedDesc;
-    localStorage.removeItem('draft_description');
-  }
-});
+      if (savedDesc) {
+        document.getElementById('description').value = savedDesc;
+        localStorage.removeItem('draft_description');
+      }
+    });
 
+    // Show success message instead of redirect
+    document.getElementById("report-form").addEventListener("submit", function (event) {
+      event.preventDefault(); // Stop page from reloading or erroring
+      document.getElementById("form-success").style.display = "block";
+      this.reset(); // Optional: clear the form after submit
+    });
   </script>
 </body>
 </html>
