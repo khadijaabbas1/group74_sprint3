@@ -209,6 +209,30 @@ nav ul li a:hover {
   cursor: pointer;
 }
 
+#form-success,
+#form-duplicate {
+  max-width: 600px;
+  margin: 15px auto;
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 1rem;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+#form-success {
+  background-color: #e6f9ed;
+  color: #2b7a3e;
+  border: 1px solid #b2e2c6;
+}
+
+#form-duplicate {
+  background-color: #fff6e6;
+  color: #a86400;
+  border: 1px solid #ffd580;
+}
+
+
 h2 {
   color: #004a99;
   font-size: 32px;
