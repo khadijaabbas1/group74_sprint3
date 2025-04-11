@@ -9,7 +9,6 @@
   <div id="container">
     <h2>Submit a Street Issue Report</h2>  
     <form method="post" enctype="multipart/form-data" style="max-width: 600px; margin: auto;">
-      {% csrf_token %}
       <label for="issue-type">Type of Issue:</label>
       <select id="issue-type" name="issue-type" required>
         <option value="">Select an issue</option>
