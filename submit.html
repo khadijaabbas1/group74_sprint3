@@ -42,6 +42,15 @@
         </label>
       </div>
 
+      <div id="contact-info" style="display:none;">
+        <label for="contact">Email or Phone Number:</label>
+        <input type="text" id="contact" name="contact" placeholder="example@email.com or 416-555-1234"> 
+      </div>
+      <script>
+        document.getElementById("subscribe").addEventListener("change", function () {
+          document.getElementById("contact-info").style.display = this.checked ? "block" : "none";
+        });
+      </script>
 
 
       <button type="submit" style="margin-top: 10px;">Submit Report</button>
