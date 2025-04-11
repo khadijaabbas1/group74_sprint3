@@ -11,7 +11,7 @@
 
     <!-- Card wrapper around the form -->
     <div class="card">
-      <form method="post" enctype="multipart/form-data">
+      <form method="post" enctype="multipart/form-data" id="report-form">
         <div class="form-group">
           <label for="issue-type">Type of Issue:</label>
           <select id="issue-type" name="issue-type" required>
@@ -47,7 +47,7 @@
           <label for="subscribe" style="display: inline;">Subscribe to subsequent notifications regarding this issue</label>
         </div>
 
-        <div id="contact-info" style="display:none;">
+        <div class="form-group" id="contact-info" style="display:none;">
           <label for="contact">Email or Phone Number:</label>
           <input type="text" id="contact" name="contact" placeholder="example@email.com or 416-555-1234">
         </div>
@@ -66,6 +66,7 @@
   </div>
 
   <script>
+    // Toggle contact info when subscribing
     document.getElementById("subscribe").addEventListener("change", function () {
       document.getElementById("contact-info").style.display = this.checked ? "block" : "none";
     });
@@ -99,7 +100,7 @@
       }
     });
 
-    document.querySelector("form").addEventListener("submit", function (event) {
+    document.getElementById("report-form").addEventListener("submit", function (event) {
       event.preventDefault();
 
       const issueType = document.getElementById("issue-type").value.trim();
@@ -139,4 +140,3 @@
   </script>
 </body>
 </html>
-
