@@ -102,35 +102,48 @@
         document.getElementById('description').value = savedDesc;
         localStorage.removeItem('draft_description');
       }
+
+      if (document.getElementById('subscribe').checked) {
+        document.getElementById('contact-info').style.display = "block";
+      }
     });
 
     document.querySelector("form").addEventListener("submit", function (event) {
       event.preventDefault();
       
-      const desc = document.getElementById("description").value;
-      const isSubscribed = document.getElementById("subscribe").checked;
-      const contact = document.getElementById("contact").value;
+    const issueType = document.getElementById("issue-type").value.trim();
+    const location = document.getElementById("location").value.trim().toLowerCase();
+    const desc = document.getElementById("description").value;
+    const isSubscribed = document.getElementById("subscribe").checked;
+    const contact = document.getElementById("contact").value;
 
-  // 1.2 Duplicate detection (simulate if "duplicate" is in description)
-      if (desc.toLowerCase().includes("duplicate")) {
-        alert("Nearby similar issue detected. Marking as duplicate.");
-      }
+    let reports = JSON.parse(localStorage.getItem("submitted_reports") || "[]");
 
-  // 1.3 Confirmation for subscription
-      if (isSubscribed && contact) {
-        alert("📬 Confirmation message sent to your contact info!");
-      }
+    // Check for duplicates
+    const isDuplicate = reports.some(report =>
+      report.issueType === issueType && report.location === location
+    );
 
-  // 1.5 False report detection
-      if (!contact && desc.trim().length < 10) {
-        alert("⚠️ Your report may be flagged for review due to missing info.");
-      }
+    if (isDuplicate) {
+      alert("⚠️ This issue at this location was already submitted. Marking as duplicate.");
+    }
 
-  // Show success message
-      document.getElementById("form-success").style.display = "block";
-      this.reset();
-      document.getElementById("contact-info").style.display = "none";
-    });
+    if (isSubscribed && contact) {
+      alert("📬 Confirmation message sent to your contact info!");
+    }
+
+    if (!contact && desc.trim().length < 10) {
+      alert("⚠️ Your report may be flagged for review due to missing info.");
+    }
+
+    // Store this report in localStorage
+    reports.push({ issueType, location });
+    localStorage.setItem("submitted_reports", JSON.stringify(reports));
+
+    document.getElementById("form-success").style.display = "block";
+    this.reset();
+    document.getElementById("contact-info").style.display = "none";
+  });
 
   </script>
 </body>
