@@ -29,9 +29,9 @@ With the Cypress System citizens of Toronto are able to:
 ## Libraries & Tools Used
 
 - Leaflet.js
-- JavaScript
 - Git & GitHub
 - XAMPP(MySQL & PHP)
+- Django
 
 ## Setup Instructions 
 
