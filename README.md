@@ -7,12 +7,17 @@ The Cypress system is an application designed to automate the process of reporti
 1. Khadija Abbas (501186956)
 2. Saadia Ali (501227915)
 3. Naureen Hossain (51239728)
-4. Shrishay Nayak (501246145)
-5. Rama Badran (501266695)
+4. Rama Badran (501266695)
 
 ## Application Features
 
-*insert later * 
+With the Cypress System citizens of Toronto are able to:
+- pinpoint the location of the problem on a user-friendly map with arbitrary accuracy
+- accurately specify the type of problem
+- report it to the City of Toronto with all necessary detail
+- subscribe to subsequent notifications about the resolution of the problem
+- consult the map in order to see problems reported in a given area
+- recieve messages regarding duplicate submitted reports and false reports
 
 ## Languages Used 
 
@@ -24,7 +29,8 @@ The Cypress system is an application designed to automate the process of reporti
 ## Setup Instructions 
 
 1. Download XAMPP then run MySqlDatabase and Apache Web Server.
-2. Open the link: "http://localhost/group74_sprint3/index.html"
+2. Clone the GitHub repo and place it inside htdocs in the XAMPP folder.
+3. Open the link: "http://localhost/group74_sprint3/index.html"
 
 ## Acknowledgements
 
