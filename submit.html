@@ -7,19 +7,7 @@
 </head>
 <body>
   <div id="container">
-    <h2>Submit a Street Issue Report</h2>
-    {% if success %}
-    <div style="color: green; text-align: center;">
-      ✅ Your report has been submitted. Thank you for helping improve our city!
-    </div>
-    {% endif %}
-    {% if flagged %}
-    <div style="color: red; text-align: center;">
-      ⚠️ Your report was flagged for review due to missing contact info or very short description.
-    </div>
-    {% endif %}
-
-    
+    <h2>Submit a Street Issue Report</h2>  
     <form method="post" enctype="multipart/form-data" style="max-width: 600px; margin: auto;">
       {% csrf_token %}
       <label for="issue-type">Type of Issue:</label>
@@ -67,6 +55,14 @@
 
       <button type="submit" style="margin-top: 10px;">Submit Report</button>
     </form>
+
+    <div id="form-success" style="display:none; color: green; margin-top: 15px; text-align: center;">
+      ✅ Your report has been submitted. Thank you for helping improve our city!
+    </div>
+    <div id="form-duplicate" style="display:none; color: orange; margin-top: 10px; text-align: center;">
+      ⚠️ This issue at this location was already submitted. Marking as duplicate. 
+    </div>
+
 
   </div>
 
@@ -122,11 +118,17 @@
     // Check for duplicates
     const isDuplicate = reports.some(report =>
       report.issueType === issueType && report.location === location
-    );
+    ); 
+      
+      document.getElementById("form-success").style.display = "none";
+      document.getElementById("form-duplicate").style.display = "none";
+      
+      if (isDuplicate) {
+        document.getElementById("form-duplicate").style.display = "block";
+      } else { 
+        document.getElementById("form-success").style.display = "block";
+      }
 
-    if (isDuplicate) {
-      alert("⚠️ This issue at this location was already submitted. Marking as duplicate.");
-    }
 
     if (isSubscribed && contact) {
       alert("📬 Confirmation message sent to your contact info!");
