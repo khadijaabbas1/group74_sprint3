@@ -8,8 +8,20 @@
 <body>
   <div id="container">
     <h2>Submit a Street Issue Report</h2>
+    {% if success %}
+    <div style="color: green; text-align: center;">
+      ✅ Your report has been submitted. Thank you for helping improve our city!
+    </div>
+    {% endif %}
+    {% if flagged %}
+    <div style="color: red; text-align: center;">
+      ⚠️ Your report was flagged for review due to missing contact info or very short description.
+    </div>
+    {% endif %}
 
-    <form id="report-form" enctype="multipart/form-data" style="max-width: 600px; margin: auto;">
+    
+    <form method="post" enctype="multipart/form-data" style="max-width: 600px; margin: auto;">
+      {% csrf_token %}
       <label for="issue-type">Type of Issue:</label>
       <select id="issue-type" name="issue-type" required>
         <option value="">Select an issue</option>
@@ -56,9 +68,6 @@
       <button type="submit" style="margin-top: 10px;">Submit Report</button>
     </form>
 
-    <div id="form-success" style="display:none; color: green; margin-top: 15px; text-align: center;">
-      ✅ Your report has been submitted. Thank you for helping improve our city!
-    </div>
   </div>
 
   <script>
@@ -95,12 +104,6 @@
       }
     });
 
-    // Show success message instead of redirect
-    document.getElementById("report-form").addEventListener("submit", function (event) {
-      event.preventDefault(); // Stop page from reloading or erroring
-      document.getElementById("form-success").style.display = "block";
-      this.reset(); // Optional: clear the form after submit
-    });
   </script>
 </body>
 </html>
