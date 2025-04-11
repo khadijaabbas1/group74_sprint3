@@ -8,7 +8,8 @@
 <body>
   <div id="container">
     <h2>Submit a Street Issue Report</h2>  
-    <form method="post" enctype="multipart/form-data" style="max-width: 600px; margin: auto;">
+    <div class="card">
+      <form method="post" enctype="multipart/form-data" style="max-width: 600px; margin: auto;">
       <div class="form-group">
         <label for="issue-type">Type of Issue:</label>
         <select id="issue-type" name="issue-type" required>
@@ -57,6 +58,7 @@
 
       <button type="submit" style="margin-top: 10px;">Submit Report</button>
     </form>
+    </div>
 
     <div id="form-success" style="display:none;">
       ✅ Your report has been submitted. Thank you for helping improve our city!
@@ -64,8 +66,6 @@
     <div id="form-duplicate" style="display:none;">
       ⚠️ This issue at this location was already submitted. Marking as duplicate. 
     </div>
-
-
   </div>
 
   <script>
