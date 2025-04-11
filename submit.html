@@ -32,9 +32,14 @@
       <label for="photo">Upload a Photo (optional):</label>
       <input type="file" id="photo" name="photo" accept="image/*">
 
-      <!-- Hidden fields to also send lat/lng if needed -->
       <input type="hidden" id="lat" name="latitude">
       <input type="hidden" id="lng" name="longitude">
+      
+      <div style="margin: 15px 0;">
+        <input type="checkbox" id="subscribe" name="subscribe">
+        <label for="subscribe">Subscribe to subsequent notification regarding this issue</label>
+      </div>
+
 
       <button type="submit" style="margin-top: 10px;">Submit Report</button>
     </form>
