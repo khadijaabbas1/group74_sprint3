@@ -7,76 +7,75 @@
 </head>
 <body>
   <div id="container">
-    <h2>Submit a Street Issue Report</h2>  
+    <h2>Submit a Street Issue Report</h2>
+
+    <!-- Card wrapper around the form -->
     <div class="card">
-      <form method="post" enctype="multipart/form-data" style="max-width: 600px; margin: auto;">
-      <div class="form-group">
-        <label for="issue-type">Type of Issue:</label>
-        <select id="issue-type" name="issue-type" required>
-          <option value="">Select an issue</option>
-          <option value="pothole">Pothole</option>
-          <option value="streetlight">Broken Streetlight</option>
-          <option value="garbage">Overflowing Garbage</option>
-          <option value="sidewalk">Damaged Sidewalk</option>
-          <option value="other">Other</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" rows="5" required placeholder="Describe the problem in detail..."></textarea>
-      </div>
-      
-      <div class="form-group">
-        <label for="location">Street Address or Coordinates:</label>
-        <div style="display: flex; gap: 10px;">
-          <input type="text" id="location" name="location" placeholder="e.g., 123 Queen St W or use map" required style="flex: 1;">
-          <button type="button" onclick="goToMap()">📍 Use Map</button>
+      <form method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="issue-type">Type of Issue:</label>
+          <select id="issue-type" name="issue-type" required>
+            <option value="">Select an issue</option>
+            <option value="pothole">Pothole</option>
+            <option value="streetlight">Broken Streetlight</option>
+            <option value="garbage">Overflowing Garbage</option>
+            <option value="sidewalk">Damaged Sidewalk</option>
+            <option value="other">Other</option>
+          </select>
         </div>
-      </div>
-      
-      <div class="form-group">
-        <label for="photo">Upload a Photo (optional):</label>
-        <input type="file" id="photo" name="photo" accept="image/*">
-      </div>
-      
-      <div class="form-group">
-        <input type="checkbox" id="subscribe" name="subscribe">
-        <label for="subscribe" style="display: inline;">Subscribe to subsequent notifications regarding this issue</label>
-      </div>
 
-      <div id="contact-info" style="display:none;">
-        <label for="contact">Email or Phone Number:</label>
-        <input type="text" id="contact" name="contact" placeholder="example@email.com or 416-555-1234"> 
-      </div>
-      <script>
-        document.getElementById("subscribe").addEventListener("change", function () {
-          document.getElementById("contact-info").style.display = this.checked ? "block" : "none";
-        });
-      </script>
+        <div class="form-group">
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" rows="5" required placeholder="Describe the problem in detail..."></textarea>
+        </div>
 
+        <div class="form-group">
+          <label for="location">Street Address or Coordinates:</label>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="location" name="location" placeholder="e.g., 123 Queen St W or use map" required style="flex: 1;">
+            <button type="button" onclick="goToMap()">📍 Use Map</button>
+          </div>
+        </div>
 
-      <button type="submit" style="margin-top: 10px;">Submit Report</button>
-    </form>
+        <div class="form-group">
+          <label for="photo">Upload a Photo (optional):</label>
+          <input type="file" id="photo" name="photo" accept="image/*">
+        </div>
+
+        <div class="form-group">
+          <input type="checkbox" id="subscribe" name="subscribe">
+          <label for="subscribe" style="display: inline;">Subscribe to subsequent notifications regarding this issue</label>
+        </div>
+
+        <div id="contact-info" style="display:none;">
+          <label for="contact">Email or Phone Number:</label>
+          <input type="text" id="contact" name="contact" placeholder="example@email.com or 416-555-1234">
+        </div>
+
+        <button type="submit">Submit Report</button>
+      </form>
     </div>
 
+    <!-- Messages below form -->
     <div id="form-success" style="display:none;">
       ✅ Your report has been submitted. Thank you for helping improve our city!
     </div>
     <div id="form-duplicate" style="display:none;">
-      ⚠️ This issue at this location was already submitted. Marking as duplicate. 
+      ⚠️ This issue at this location was already submitted. Marking as duplicate.
     </div>
   </div>
 
   <script>
+    document.getElementById("subscribe").addEventListener("change", function () {
+      document.getElementById("contact-info").style.display = this.checked ? "block" : "none";
+    });
+
     function goToMap() {
-      // Save issue and description so they’re not lost
       localStorage.setItem('draft_issue_type', document.getElementById('issue-type').value);
       localStorage.setItem('draft_description', document.getElementById('description').value);
       window.location.href = 'mappin.html';
     }
 
-    // Load coordinates + saved values from localStorage
     window.addEventListener('DOMContentLoaded', () => {
       const lat = localStorage.getItem('selected_lat');
       const lng = localStorage.getItem('selected_lng');
@@ -85,8 +84,6 @@
 
       if (lat && lng) {
         document.getElementById('location').value = `Lat: ${lat}, Lng: ${lng}`;
-        document.getElementById('lat').value = lat;
-        document.getElementById('lng').value = lng;
         localStorage.removeItem('selected_lat');
         localStorage.removeItem('selected_lng');
       }
@@ -100,46 +97,46 @@
         document.getElementById('description').value = savedDesc;
         localStorage.removeItem('draft_description');
       }
-
-      if (document.getElementById('subscribe').checked) {
-        document.getElementById('contact-info').style.display = "block";
-      }
     });
 
     document.querySelector("form").addEventListener("submit", function (event) {
       event.preventDefault();
-      
-    const issueType = document.getElementById("issue-type").value.trim();
-    const location = document.getElementById("location").value.trim().toLowerCase();
-    const desc = document.getElementById("description").value;
-    const isSubscribed = document.getElementById("subscribe").checked;
-    const contact = document.getElementById("contact").value;
 
-    let reports = JSON.parse(localStorage.getItem("submitted_reports") || "[]");
+      const issueType = document.getElementById("issue-type").value.trim();
+      const location = document.getElementById("location").value.trim().toLowerCase();
+      const desc = document.getElementById("description").value;
+      const isSubscribed = document.getElementById("subscribe").checked;
+      const contact = document.getElementById("contact").value;
 
-    // Check for duplicates
-    const isDuplicate = reports.some(report =>
-      report.issueType === issueType && report.location === location
-    ); 
-      
+      let reports = JSON.parse(localStorage.getItem("submitted_reports") || "[]");
+
+      const isDuplicate = reports.some(report =>
+        report.issueType === issueType && report.location === location
+      );
+
       document.getElementById("form-success").style.display = "none";
       document.getElementById("form-duplicate").style.display = "none";
-      
+
       if (isDuplicate) {
         document.getElementById("form-duplicate").style.display = "block";
-      } else { 
+      } else {
         document.getElementById("form-success").style.display = "block";
-
-  // Store this report in localStorage only if it's not a duplicate
         reports.push({ issueType, location });
         localStorage.setItem("submitted_reports", JSON.stringify(reports));
       }
 
-      
-    this.reset();
-    document.getElementById("contact-info").style.display = "none";
-  });
+      if (isSubscribed && contact) {
+        alert("📬 Confirmation message sent to your contact info!");
+      }
 
+      if (!contact && desc.trim().length < 10) {
+        alert("⚠️ Your report may be flagged for review due to missing info.");
+      }
+
+      this.reset();
+      document.getElementById("contact-info").style.display = "none";
+    });
   </script>
 </body>
 </html>
+
