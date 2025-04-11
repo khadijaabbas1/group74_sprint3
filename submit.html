@@ -44,20 +44,6 @@
         <label for="subscribe" style="display: inline;">Subscribe to subsequent notifications regarding this issue</label>
       </div>
 
-
-      <label for="photo">Upload a Photo (optional):</label>
-      <input type="file" id="photo" name="photo" accept="image/*">
-
-      <input type="hidden" id="lat" name="latitude">
-      <input type="hidden" id="lng" name="longitude">
-      
-      <div style="margin: 15px 0; font-size: 0.9rem; color: #333;">
-        <label style="display: flex; align-items: center; gap: 8px;">
-          <input type="checkbox" id="subscribe" name="subscribe">
-          <span>Subscribe to subsequent notifications regarding this issue</span>
-        </label>
-      </div>
-
       <div id="contact-info" style="display:none;">
         <label for="contact">Email or Phone Number:</label>
         <input type="text" id="contact" name="contact" placeholder="example@email.com or 416-555-1234"> 
@@ -143,22 +129,13 @@
         document.getElementById("form-duplicate").style.display = "block";
       } else { 
         document.getElementById("form-success").style.display = "block";
+
+  // Store this report in localStorage only if it's not a duplicate
+        reports.push({ issueType, location });
+        localStorage.setItem("submitted_reports", JSON.stringify(reports));
       }
 
-
-    if (isSubscribed && contact) {
-      alert("📬 Confirmation message sent to your contact info!");
-    }
-
-    if (!contact && desc.trim().length < 10) {
-      alert("⚠️ Your report may be flagged for review due to missing info.");
-    }
-
-    // Store this report in localStorage
-    reports.push({ issueType, location });
-    localStorage.setItem("submitted_reports", JSON.stringify(reports));
-
-    document.getElementById("form-success").style.display = "block";
+      
     this.reset();
     document.getElementById("contact-info").style.display = "none";
   });
