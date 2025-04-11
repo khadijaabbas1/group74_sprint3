@@ -10,7 +10,7 @@
 
     <header>
       <div id="worldimage">
-      <img src="img/banner (1).png" alt="City of Toronto Banner">
+        <img src="img/banner (1).png" alt="City of Toronto Banner">
       </div>
       <nav>
         <ul>
@@ -25,9 +25,9 @@
 
     <main>
       <section id="sideimage">
-      <h3>Welcome to Cypress – Street Issue Reporting for Toronto</h3>
-      <p class="tagline">Help make our city better—one click at a time.</p>
-      <img src="img/streets.jpg" alt="Streets of Toronto">
+        <h3>Welcome to Cypress – Street Issue Reporting for Toronto</h3>
+        <p class="tagline">Help make our city better—one click at a time.</p>
+        <img src="img/streets.jpg" alt="Streets of Toronto">
       </section>
 
       <section id="body1">
@@ -36,32 +36,63 @@
           From potholes to broken streetlights, this platform allows you to submit detailed reports pinpointed on an interactive map.
         </p>
       </section>
+
+      <!-- ✅ FORM GOES HERE -->
+      <section id="form-section">
+        <h2>Submit a Street Issue Report</h2>
+        <form id="report-form" method="GET" action="submit.html" enctype="multipart/form-data" style="max-width: 600px; margin: auto;">
+          <label for="issue-type">Type of Issue:</label>
+          <select id="issue-type" name="issue-type" required>
+            <option value="">Select an issue</option>
+            <option value="pothole">Pothole</option>
+            <option value="streetlight">Broken Streetlight</option>
+            <option value="garbage">Overflowing Garbage</option>
+            <option value="sidewalk">Damaged Sidewalk</option>
+            <option value="other">Other</option>
+          </select>
+
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" rows="5" required placeholder="Describe the problem in detail..."></textarea>
+
+          <label for="location">Street Address or Coordinates:</label>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="location" name="location" required placeholder="e.g., 123 Queen St W or use map" style="flex: 1;">
+            <button type="button">📍 Use Map</button>
+          </div>
+
+          <label for="photo">Upload a Photo (optional):</label>
+          <input type="file" id="photo" name="photo" accept="image/*">
+
+          <input type="hidden" id="lat" name="latitude">
+          <input type="hidden" id="lng" name="longitude">
+
+          <button type="submit" style="margin-top: 10px;">Submit Report</button>
+        </form>
+      </section>
     </main>
 
-
+    <footer id="contact-bar">
+      <h4>City Services Contact Information</h4>
+      <div class="contact-columns">
+        <div class="contact-item">
+          <strong>📞 City Services (311)</strong>
+          <p>For general inquiries, street issues, garbage, water & more.</p>
+        </div>
+        <div class="contact-item">
+          <strong>🚨 Emergency (911)</strong>
+          <p>Police, Fire & Ambulance – for life-threatening situations.</p>
+        </div>
+        <div class="contact-item">
+          <strong>📱 Non-Emergency (416-808-2222)</strong>
+          <p>Toronto Police non-urgent line.</p>
+        </div>
+        <div class="contact-item">
+          <strong>🧑‍🤝‍🧑 Social Services (211)</strong>
+          <p>Community, housing, food & mental health support.</p>
+        </div>
+      </div>
+    </footer>
   </div>
-
-  <footer id="contact-bar">
-  <h4>City Services Contact Information</h4>
-  <div class="contact-columns">
-    <div class="contact-item">
-      <strong>📞 City Services (311)</strong>
-      <p>For general inquiries, street issues, garbage, water & more.</p>
-    </div>
-    <div class="contact-item">
-      <strong>🚨 Emergency (911)</strong>
-      <p>Police, Fire & Ambulance – for life-threatening situations.</p>
-    </div>
-    <div class="contact-item">
-      <strong>📱 Non-Emergency (416-808-2222)</strong>
-      <p>Toronto Police non-urgent line.</p>
-    </div>
-    <div class="contact-item">
-      <strong>🧑‍🤝‍🧑 Social Services (211)</strong>
-      <p>Community, housing, food & mental health support.</p>
-    </div>
-  </div>
-</footer>
-
 </body>
 </html>
+
