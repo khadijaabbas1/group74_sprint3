@@ -28,7 +28,7 @@ With the Cypress System citizens of Toronto are able to:
 
 ## Libraries & Tools Used
 
--Leaflet.js
+- Leaflet.js
 - JavaScript
 - Git & GitHub
 - XAMPP
