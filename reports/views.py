@@ -28,3 +28,8 @@ def submit_report(request):
     else:
         form = ReportForm()
     return render(request, 'submit.html', {'form': form})
+    
+
+def all_reports(request):
+    data = list(Report.objects.values())
+    return JsonResponse(data, safe=False)
