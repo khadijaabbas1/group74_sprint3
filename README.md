@@ -25,6 +25,7 @@ With the Cypress System citizens of Toronto are able to:
 - CSS
 - PHP
 - Python
+- JavaScript
 
 ## Libraries & Tools Used
 
